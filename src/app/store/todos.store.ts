@@ -42,6 +42,11 @@ export const TodosStore = signalStore(
       }
 
       return todos
+    }),
+    activeTodosAmount: computed(() => {
+      const todos = state.todos()
+      const activeTodos = todos.filter(todo => todo.status === 'active')
+      return activeTodos.length
     })
   })),
   withHooks({
