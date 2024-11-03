@@ -1,7 +1,10 @@
 @let isCompleted = todo().status === 'completed';
 
 <article class="bg-white dark:bg-[rgb(37,39,61)] flex gap-2 items-center py-4 px-6">
-  <check-input [isCompleted]="isCompleted"></check-input>
+  <check-input
+    [isCompleted]="isCompleted"
+    (isChecked)="changeIsChecked($event)">
+  </check-input>
   <span
     class="grow ml-1 text-[#494C6B] dark:text-[#C8CBE7]"
     [ngClass]="{ 'text-[#D1D2DA] line-through dark:text-[#4D5067]': isCompleted }"

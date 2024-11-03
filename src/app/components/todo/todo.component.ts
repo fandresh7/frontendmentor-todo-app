@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core'
 import { CheckInputComponent } from '../check-input/check-input.component'
 import { IconCrossComponent } from '../../shared/components/icons/icons.component'
 import { Todo } from '../../models/todo'
 import { NgClass } from '@angular/common'
+import { TodosStore } from '../../store/todos.store'
 
 @Component({
   selector: 'todo',
@@ -13,5 +14,12 @@ import { NgClass } from '@angular/common'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoComponent {
+  store = inject(TodosStore)
+
   todo = input.required<Todo>()
+
+  async changeIsChecked(value: boolean) {
+    const status = value ? 'completed' : 'active'
+    await this.store.changeTodoStatus(this.todo().id, status)
+  }
 }

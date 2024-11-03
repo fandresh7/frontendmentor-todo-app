@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { sleep } from '../shared/utils/sleep'
 
 import { TODOS } from '../models/mock-data'
-import { Todo } from '../models/todo'
+import { Todo, TodoStatus } from '../models/todo'
 
 @Injectable({
   providedIn: 'root'
@@ -39,14 +39,14 @@ export class TodosService {
     } as Todo
   }
 
-  async markTodoAsCompleted(id: string) {
+  async changeTodoStatus(id: string, status: TodoStatus) {
     await sleep(500)
 
     const todo = TODOS.find(todo => todo.id === id)!
 
     return {
       ...todo,
-      status: 'completed',
+      status,
       completedAt: new Date()
     } as Todo
   }
