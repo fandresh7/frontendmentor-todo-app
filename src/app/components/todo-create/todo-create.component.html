@@ -1,10 +1,15 @@
-<div class="bg-white dark:bg-[#25273D] flex items-center gap-3 py-3 px-6 rounded-md">
+<div class="relative bg-white dark:bg-[#25273D] flex items-center gap-3 py-3 px-6 rounded-md">
   <check-input (isChecked)="changeIsChecked($event)"></check-input>
 
   <input
     #input
     (keyup.enter)="createTodo(input.value)"
     type="text"
+    [disabled]="loading()"
     class="bg-transparent text-[#393A4B] dark:text-[#C8CBE7] w-full font-normal outline-none"
     placeholder="Create a new todo..." />
+
+  @if (loading()) {
+    <icon-spin class="absolute right-0 text-[#25273D] dark:text-white"></icon-spin>
+  }
 </div>

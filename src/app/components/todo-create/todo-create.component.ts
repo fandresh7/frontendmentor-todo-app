@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, ElementRef, inject, signal, viewChild } from '@angular/core'
 import { CheckInputComponent } from '../check-input/check-input.component'
 import { TodosStore } from '../../store/todos.store'
+import { IconSpinComponent } from '../../shared/components/icons/icons.component'
 
 @Component({
   selector: 'todo-create',
   standalone: true,
-  imports: [CheckInputComponent],
+  imports: [CheckInputComponent, IconSpinComponent],
   templateUrl: './todo-create.component.html',
   styleUrl: './todo-create.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,11 +17,17 @@ export class TodoCreateComponent {
   input = viewChild.required<ElementRef<HTMLInputElement>>('input')
 
   isChecked = signal<boolean>(false)
+  loading = signal<boolean>(false)
 
   async createTodo(value: string) {
+    if (!value) return
+
+    this.loading.set(true)
+
     const status = this.isChecked() ? 'completed' : 'active'
     await this.store.addTodo(value, status)
 
+    this.loading.set(false)
     this.input().nativeElement.value = ''
   }
 
