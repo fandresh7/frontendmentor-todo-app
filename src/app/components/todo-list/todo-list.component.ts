@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core'
 import { TodoComponent } from '../todo/todo.component'
 import { TodoListFooterComponent } from '../todo-list-footer/todo-list-footer.component'
+import { TodosStore } from '../../store/todos.store'
 
 @Component({
   selector: 'todo-list',
@@ -10,4 +11,6 @@ import { TodoListFooterComponent } from '../todo-list-footer/todo-list-footer.co
   styleUrl: './todo-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoListComponent {}
+export class TodoListComponent {
+  store = inject(TodosStore)
+}

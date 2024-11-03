@@ -1,9 +1,6 @@
 <section class="mt-4 flex flex-col gap-0.5 rounded-md overflow-hidden">
-  <todo></todo>
-  <todo></todo>
-  <todo></todo>
-  <todo></todo>
-  <todo></todo>
-  <todo></todo>
+  @for (todo of store.filteredTodos(); track todo.id) {
+    <todo [todo]="todo"></todo>
+  }
   <todo-list-footer></todo-list-footer>
 </section>
