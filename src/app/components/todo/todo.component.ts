@@ -22,4 +22,9 @@ export class TodoComponent {
     const status = value ? 'completed' : 'active'
     await this.store.changeTodoStatus(this.todo().id, status)
   }
+
+  async deleteTodo() {
+    const id = this.todo().id
+    await this.store.deleteTodo(id)
+  }
 }

@@ -11,7 +11,9 @@
     >{{ todo().title }}</span
   >
   @if (!isCompleted) {
-    <button class="text-[#494C6B] hover:text-red-500 transition-colors duration-300">
+    <button
+      class="text-[#494C6B] hover:text-red-500 transition-colors duration-300"
+      (click)="deleteTodo()">
       <icon-cross></icon-cross>
     </button>
   }
