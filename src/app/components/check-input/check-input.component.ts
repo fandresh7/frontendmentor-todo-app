@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, viewChild } from '@angular/core'
+import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, input, output, viewChild } from '@angular/core'
 import { IconCheckComponent } from '../../shared/components/icons/icons.component'
 import { DarkModeService } from '../../shared/services/dark-mode.service'
 
@@ -16,6 +16,8 @@ export class CheckInputComponent {
   isCompleted = input<boolean>(false)
   label = viewChild.required<ElementRef<HTMLLabelElement>>('label')
 
+  isChecked = output<boolean>()
+
   constructor() {
     effect(() => {
       const darkMode = this.darkModeService.darkMode()
@@ -29,6 +31,7 @@ export class CheckInputComponent {
   }
 
   toggleCompleted(event: Event) {
-    console.log(event)
+    const input = event.target as HTMLInputElement
+    this.isChecked.emit(input.checked)
   }
 }
