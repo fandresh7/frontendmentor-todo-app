@@ -7,7 +7,8 @@
     @for (todo of store.filteredTodos(); track todo.id) {
       <todo
         [todo]="todo"
-        cdkDrag>
+        cdkDrag
+        @todoAnimation>
       </todo>
     }
   </div>

@@ -27,7 +27,7 @@ export class TodosService {
       ...todo
     } as Todo
 
-    TODOS.push(newTodo)
+    TODOS.unshift(newTodo)
 
     return newTodo
   }
