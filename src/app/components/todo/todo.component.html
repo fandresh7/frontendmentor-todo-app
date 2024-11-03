@@ -10,6 +10,11 @@
     [ngClass]="{ 'text-[#D1D2DA] line-through dark:text-[#4D5067]': isCompleted }"
     >{{ todo().title }}</span
   >
+
+  @if (loading()) {
+    <icon-spin class="text-[#25273D] dark:text-white"></icon-spin>
+  }
+
   @if (!isCompleted) {
     <button
       class="text-[#494C6B] hover:text-red-500 transition-colors duration-300"
