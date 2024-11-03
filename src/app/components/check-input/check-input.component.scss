@@ -31,5 +31,12 @@ label:not(:has(input:checked)):hover::after {
   width: 90%;
   height: 90%;
   border-radius: 50%;
+}
+
+label:not(.dark)::after {
   background-color: white;
+}
+
+label.dark::after {
+  background-color: #25273D;
 }
