@@ -65,4 +65,14 @@ export class TodosService {
 
     return TODOS
   }
+
+  async reorder(id: string, currentIndex: number) {
+    await sleep(500)
+
+    const index = TODOS.findIndex(todo => todo.id === id)
+    const [todo] = TODOS.splice(index, 1)
+    TODOS.splice(currentIndex, 0, todo)
+
+    return TODOS
+  }
 }

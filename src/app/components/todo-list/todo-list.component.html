@@ -1,6 +1,15 @@
 <section class="mt-4 flex flex-col gap-0.5 rounded-md overflow-hidden">
-  @for (todo of store.filteredTodos(); track todo.id) {
-    <todo [todo]="todo"></todo>
-  }
+  <div
+    class="flex flex-col gap-0.5"
+    cdkDropList
+    [cdkDropListData]="store.filteredTodos()"
+    (cdkDropListDropped)="drop($event)">
+    @for (todo of store.filteredTodos(); track todo.id) {
+      <todo
+        [todo]="todo"
+        cdkDrag>
+      </todo>
+    }
+  </div>
   <todo-list-footer></todo-list-footer>
 </section>

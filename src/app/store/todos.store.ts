@@ -47,6 +47,17 @@ export const TodosStore = signalStore(
 
       patchState(store, { todos: updatedTodos })
     },
+    async reorder(id: string, currentIndex: number) {
+      const todos = [...store.todos()]
+
+      const index = todos.findIndex(todo => todo.id === id)
+      const [todo] = todos.splice(index, 1)
+      todos.splice(currentIndex, 0, todo)
+
+      patchState(store, { todos })
+
+      await todosService.reorder(id, currentIndex)
+    },
     updateFilter(filter: Filter) {
       patchState(store, { filter })
     }
