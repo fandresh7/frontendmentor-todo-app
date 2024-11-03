@@ -1,5 +1,20 @@
 <article class="bg-white dark:bg-[#25273D] py-4 px-6 sm:p-0 flex gap-4 justify-center rounded-md">
-  <p class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer">All</p>
-  <p class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer">Active</p>
-  <p class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer">Completed</p>
+  <p
+    class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer"
+    [ngClass]="{ '!text-[#3A7CFD]': isActive('all') }"
+    (click)="change('all')">
+    All
+  </p>
+  <p
+    class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer"
+    [ngClass]="{ '!text-[#3A7CFD]': isActive('active') }"
+    (click)="change('active')">
+    Active
+  </p>
+  <p
+    class="text-[#9495A5] dark:text-[#5B5E7E] hover:text-[#3A7CFD] dark:hover:text-[#3A7CFD] transition-colors duration-300 cursor-pointer"
+    [ngClass]="{ '!text-[#3A7CFD]': isActive('completed') }"
+    (click)="change('completed')">
+    Completed
+  </p>
 </article>

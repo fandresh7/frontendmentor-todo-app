@@ -3,7 +3,7 @@ import { computed, inject } from '@angular/core'
 import { Todo, TodoStatus } from '../models/todo'
 import { TodosService } from '../services/todos.service'
 
-type Filter = 'all' | 'completed' | 'active'
+export type Filter = 'all' | 'completed' | 'active'
 
 export interface TodosState {
   todos: Todo[]
@@ -27,6 +27,9 @@ export const TodosStore = signalStore(
       patchState(store, state => ({
         todos: [...state.todos, todo]
       }))
+    },
+    updateFilter(filter: Filter) {
+      patchState(store, { filter })
     }
   })),
   withComputed(state => ({
