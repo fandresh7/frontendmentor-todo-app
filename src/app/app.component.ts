@@ -12,6 +12,4 @@ import { FiltersComponent } from './components/filters/filters.component'
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'todo-app'
-}
+export class AppComponent {}

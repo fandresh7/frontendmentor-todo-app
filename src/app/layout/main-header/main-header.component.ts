@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { DarkModeButtonComponent } from '../../shared/components/dark-mode-button/dark-mode-button.component'
+import { DarkModeButtonComponent } from '../dark-mode-button/dark-mode-button.component'
 
 @Component({
   selector: 'main-header',
