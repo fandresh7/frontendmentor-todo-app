@@ -11,7 +11,7 @@ export class TodosService {
   async getTodos() {
     await sleep(500)
 
-    return TODOS
+    return [...TODOS]
   }
 
   async addTodo(todo: Partial<Todo>) {
@@ -21,44 +21,48 @@ export class TodosService {
       todo.completedAt = new Date()
     }
 
-    return {
+    const newTodo = {
       id: new Date().getTime().toString(),
       createdAt: new Date(),
       ...todo
     } as Todo
+
+    TODOS.push(newTodo)
+
+    return newTodo
   }
 
   async deleteTodo(id: string) {
     await sleep(500)
 
-    const todo = TODOS.find(todo => todo.id === id)!
+    const index = TODOS.findIndex(todo => todo.id === id)
+    const updatedTodo = { ...TODOS[index], isDeleted: true } as Todo
 
-    return {
-      ...todo,
-      isDeleted: true
-    } as Todo
+    TODOS[index] = updatedTodo
+
+    return updatedTodo
   }
 
   async changeTodoStatus(id: string, status: TodoStatus) {
     await sleep(500)
 
-    const todo = TODOS.find(todo => todo.id === id)!
+    const index = TODOS.findIndex(todo => todo.id === id)
+    const updatedTodo = { ...TODOS[index], status, completedAt: new Date() } as Todo
 
-    return {
-      ...todo,
-      status,
-      completedAt: new Date()
-    } as Todo
+    TODOS[index] = updatedTodo
+
+    return updatedTodo
   }
 
-  async updateTodo(id: string, title: string) {
+  async clearCompleted() {
     await sleep(500)
 
-    const todo = TODOS.find(todo => todo.id === id)!
+    TODOS.forEach((todo, index) => {
+      if (todo.status === 'completed') {
+        TODOS[index] = { ...todo, isDeleted: true }
+      }
+    })
 
-    return {
-      ...todo,
-      title
-    } as Todo
+    return TODOS
   }
 }

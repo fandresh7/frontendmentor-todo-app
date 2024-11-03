@@ -12,4 +12,8 @@ import { TodosStore } from '../../store/todos.store'
 })
 export class TodoListFooterComponent {
   store = inject(TodosStore)
+
+  async clearCompleted() {
+    await this.store.clearCompleted()
+  }
 }

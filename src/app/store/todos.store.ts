@@ -42,6 +42,11 @@ export const TodosStore = signalStore(
         todos: state.todos.map(todo => (todo.id === id ? deletedTodo : todo))
       }))
     },
+    async clearCompleted() {
+      const updatedTodos = await todosService.clearCompleted()
+
+      patchState(store, { todos: updatedTodos })
+    },
     updateFilter(filter: Filter) {
       patchState(store, { filter })
     }
@@ -51,11 +56,11 @@ export const TodosStore = signalStore(
       const todos = state.todos()
 
       if (state.filter() === 'completed') {
-        return todos.filter(todo => todo.status === 'completed')
+        return todos.filter(todo => todo.status === 'completed' && !todo.isDeleted)
       }
 
       if (state.filter() === 'active') {
-        return todos.filter(todo => todo.status === 'active')
+        return todos.filter(todo => todo.status === 'active' && !todo.isDeleted)
       }
 
       return todos.filter(todo => !todo.isDeleted)
