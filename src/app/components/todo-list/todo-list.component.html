@@ -1,6 +1,6 @@
 <section class="mt-4 flex flex-col gap-0.5 rounded-md overflow-hidden">
   <div
-    class="flex flex-col gap-0.5 max-h-[346px] overflow-y-auto"
+    class="flex flex-col gap-0.5 md:max-h-[346px] md:overflow-y-auto"
     cdkDropList
     [cdkDropListData]="store.filteredTodos()"
     (cdkDropListDropped)="drop($event)">
