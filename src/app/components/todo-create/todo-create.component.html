@@ -3,7 +3,7 @@
 
   <input
     #input
-    (keyup.enter)="createTodo(input.value)"
+    (keyup)="handleKeyup($event, input.value)"
     type="text"
     [disabled]="loading()"
     class="bg-transparent text-[#393A4B] dark:text-[#C8CBE7] w-full font-normal outline-none"

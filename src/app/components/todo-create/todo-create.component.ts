@@ -31,6 +31,12 @@ export class TodoCreateComponent {
     this.input().nativeElement.value = ''
   }
 
+  async handleKeyup(event: KeyboardEvent, value: string) {
+    if (event.key === 'Enter') {
+      await this.createTodo(value)
+    }
+  }
+
   changeIsChecked(value: boolean) {
     this.isChecked.set(value)
   }
