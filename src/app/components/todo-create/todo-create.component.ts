@@ -28,7 +28,11 @@ export class TodoCreateComponent {
     await this.store.addTodo(value, status)
 
     this.loading.set(false)
-    this.input().nativeElement.value = ''
+
+    setTimeout(() => {
+      this.input().nativeElement.value = ''
+      this.input().nativeElement.focus()
+    })
   }
 
   async handleKeyup(event: KeyboardEvent, value: string) {

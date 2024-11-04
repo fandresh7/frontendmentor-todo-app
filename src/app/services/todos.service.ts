@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core'
 import { sleep } from '../shared/utils/sleep'
 
-import { TODOS } from '../models/mock-data'
+import { TODOS_MOCK } from '../models/mock-data'
 import { Todo, TodoStatus } from '../models/todo'
+
+let TODOS = TODOS_MOCK
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class TodosService {
       ...todo
     } as Todo
 
-    TODOS.unshift(newTodo)
+    TODOS = [newTodo, ...TODOS]
 
     return newTodo
   }

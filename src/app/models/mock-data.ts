@@ -1,6 +1,6 @@
 import { Todo } from './todo'
 
-export const TODOS: Todo[] = [
+export const TODOS_MOCK: Todo[] = [
   {
     id: '1',
     title: 'Complete online JavaScript course',
