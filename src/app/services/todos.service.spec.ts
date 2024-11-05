@@ -4,7 +4,7 @@ import { TodosService } from './todos.service'
 import { TODOS_MOCK } from '../models/mock-data'
 import { Todo } from '../models/todo'
 
-fdescribe('TodosService', () => {
+describe('TodosService', () => {
   let service: TodosService
 
   beforeEach(() => {
