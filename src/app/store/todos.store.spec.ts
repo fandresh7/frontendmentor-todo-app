@@ -64,7 +64,7 @@ class MockTodosService {
   }
 }
 
-fdescribe('TodosStore', () => {
+describe('TodosStore', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
