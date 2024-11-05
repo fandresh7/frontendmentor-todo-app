@@ -49,7 +49,13 @@ export class TodosService {
     await sleep(500)
 
     const index = TODOS.findIndex(todo => todo.id === id)
-    const updatedTodo = { ...TODOS[index], status, completedAt: new Date() } as Todo
+    const updatedTodo = { ...TODOS[index], status } as Todo
+
+    if (status === 'completed') {
+      updatedTodo.completedAt = new Date()
+    } else {
+      updatedTodo.completedAt = undefined
+    }
 
     TODOS[index] = updatedTodo
 
