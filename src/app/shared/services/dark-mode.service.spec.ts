@@ -30,6 +30,9 @@ describe('DarkModeService', () => {
   })
 
   it('should toggle dark Mode to true, then to false when toggleDarkMode is called', () => {
+    mockLocalStorageService.getItem.withArgs('theme').and.returnValue('light')
+    service['initDarkMode']()
+
     service.toggleDarkMode()
     expect(service.darkMode()).toBe(true)
 
