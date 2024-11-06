@@ -4,7 +4,7 @@ import { LocalStorageService } from './local-storage.service'
 
 class MockLocalStorageService {
   setItem = jasmine.createSpy('setItem')
-  getItem = jasmine.createSpy('getItem')
+  getItem = jasmine.createSpy('getItem').withArgs('theme').and.returnValue('light')
 }
 
 describe('DarkModeService', () => {
@@ -38,7 +38,9 @@ describe('DarkModeService', () => {
   })
 
   it('should set dark mode to true if "theme" in localStorage is "dark"', () => {
-    mockLocalStorageService.getItem.and.returnValue('dark')
+    mockLocalStorageService.getItem.withArgs('theme').and.returnValue('dark')
+
+    service['initDarkMode']()
     expect(service.darkMode()).toBe(true)
   })
 })

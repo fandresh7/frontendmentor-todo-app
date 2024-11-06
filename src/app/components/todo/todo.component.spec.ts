@@ -116,9 +116,9 @@ describe('TodoComponent', () => {
 
   it('should title element not have isCompleted classes if todo is active', () => {
     const todo = TODOS_MOCK[0]
-    todo.status = 'active'
+    const activeTodo = { ...todo, status: 'active' }
 
-    fixture.componentRef.setInput('todo', todo)
+    fixture.componentRef.setInput('todo', activeTodo)
     fixture.detectChanges()
 
     const spanElement = compiled.querySelector('span')

@@ -65,6 +65,8 @@ class MockTodosService {
 }
 
 describe('TodosStore', () => {
+  let service: MockTodosService
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -74,6 +76,12 @@ describe('TodosStore', () => {
         }
       ]
     })
+
+    service = TestBed.inject(TodosService) as unknown as MockTodosService
+  })
+
+  afterEach(() => {
+    service.todos = [...TODOS_MOCK]
   })
 
   it('should retrieve the list of todos from the mock service', fakeAsync(() => {
@@ -222,6 +230,7 @@ describe('TodosStore', () => {
 
   it('should return the correct count of non-deleted active todos', fakeAsync(() => {
     const store = TestBed.inject(TodosStore)
+    store.updateFilter('all')
     tick()
 
     expect(store.activeTodosAmount()).toBe(3)

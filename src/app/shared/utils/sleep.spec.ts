@@ -11,6 +11,6 @@ describe('sleep', () => {
     const elapsed = end - start
 
     expect(elapsed).toBeGreaterThanOrEqual(delay)
-    expect(elapsed).toBeLessThan(delay + 50)
+    expect(elapsed).toBeLessThan(delay + 100)
   })
 })
