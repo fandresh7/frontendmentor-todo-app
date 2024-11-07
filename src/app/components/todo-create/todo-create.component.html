@@ -2,6 +2,7 @@
   <check-input (isChecked)="changeIsChecked($event)"></check-input>
 
   <input
+    id="input"
     #input
     (keyup)="handleKeyup($event, input.value)"
     type="text"
