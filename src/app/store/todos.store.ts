@@ -84,8 +84,10 @@ export const TodosStore = signalStore(
   })),
   withHooks({
     async onInit(store, todosService = inject(TodosService)) {
+      patchState(store, { loading: true })
+
       const todos = await todosService.getTodos()
-      patchState(store, { todos })
+      patchState(store, { todos, loading: false })
     }
   })
 )

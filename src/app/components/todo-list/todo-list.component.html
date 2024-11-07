@@ -10,11 +10,13 @@
         cdkDrag>
       </todo>
     } @empty {
-      <article
-        id="empty_message"
-        class="bg-white text-[#494C6B] dark:text-[#C8CBE7] dark:bg-[rgb(37,39,61)] flex gap-2 items-center py-4 px-6">
-        <p class="text-center w-full">It's empty here</p>
-      </article>
+      @if (!store.loading()) {
+        <article
+          id="empty_message"
+          class="bg-white text-[#494C6B] dark:text-[#C8CBE7] dark:bg-[rgb(37,39,61)] flex gap-2 items-center py-4 px-6">
+          <p class="text-center w-full">It's empty here</p>
+        </article>
+      }
     }
   </div>
   <todo-list-footer></todo-list-footer>

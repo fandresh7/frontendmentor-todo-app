@@ -10,6 +10,7 @@ class MockTodosStore {
   reorder = jasmine.createSpy('reorder').and.resolveTo()
   filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue(TODOS_MOCK)
   activeTodosAmount = jasmine.createSpy('activeTodosAmount')
+  loading = jasmine.createSpy('loading')
   filter = jasmine.createSpy('filter')
 }
 
@@ -73,8 +74,9 @@ describe('TodoListComponent', () => {
     })
   })
 
-  it('should display an empty message when there are no todos', () => {
+  it('should display an empty message when there are no todos and loading is false', () => {
     store.filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue([])
+    store.loading = jasmine.createSpy('loading').and.returnValue(false)
 
     fixture.detectChanges()
 
@@ -82,11 +84,24 @@ describe('TodoListComponent', () => {
     const articleElement = compiled.querySelector('#empty_message')
 
     expect(todoElements.length).toBe(0)
-    expect(articleElement).toBeDefined()
+    expect(articleElement).not.toBeNull()
+  })
+
+  it('should not display an empty message when there are no todos and loading is true', () => {
+    store.filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue([])
+    store.loading = jasmine.createSpy('loading').and.returnValue(true)
+
+    fixture.detectChanges()
+
+    const todoElements = compiled.querySelectorAll('todo')
+    const articleElement = compiled.querySelector('#empty_message')
+
+    expect(todoElements.length).toBe(0)
+    expect(articleElement).toBeNull()
   })
 
   it('should render the TodoListFooter component', () => {
     const footerElement = compiled.querySelector('todo-list-footer')
-    expect(footerElement).toBeDefined()
+    expect(footerElement).not.toBeNull()
   })
 })

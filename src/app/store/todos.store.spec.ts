@@ -86,8 +86,11 @@ describe('TodosStore', () => {
 
   it('should retrieve the list of todos from the mock service', fakeAsync(() => {
     const store = TestBed.inject(TodosStore)
+
+    expect(store.loading()).toBe(true)
     tick()
 
+    expect(store.loading()).toBe(false)
     expect(store.todos().length).toBe(TODOS_MOCK.length)
   }))
 
