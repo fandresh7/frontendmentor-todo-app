@@ -1,7 +1,8 @@
 import { patchState, signalStore, withComputed, withHooks, withMethods, withState } from '@ngrx/signals'
-import { computed, inject } from '@angular/core'
+import { computed, inject, PLATFORM_ID } from '@angular/core'
 import { Todo, TodoStatus } from '../models/todo'
 import { TodosService } from '../services/todos.service'
+import { isPlatformBrowser } from '@angular/common'
 
 export type Filter = 'all' | 'completed' | 'active'
 
@@ -84,10 +85,14 @@ export const TodosStore = signalStore(
   })),
   withHooks({
     async onInit(store, todosService = inject(TodosService)) {
-      patchState(store, { loading: true })
+      const platformId = inject(PLATFORM_ID)
 
-      const todos = await todosService.getTodos()
-      patchState(store, { todos, loading: false })
+      if (isPlatformBrowser(platformId)) {
+        patchState(store, { loading: true })
+
+        const todos = await todosService.getTodos()
+        patchState(store, { todos, loading: false })
+      }
     }
   })
 )

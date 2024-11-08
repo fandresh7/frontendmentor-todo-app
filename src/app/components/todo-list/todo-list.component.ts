@@ -5,11 +5,12 @@ import { TodoComponent } from '../todo/todo.component'
 import { TodoListFooterComponent } from '../todo-list-footer/todo-list-footer.component'
 import { TodosStore } from '../../store/todos.store'
 import { Todo } from '../../models/todo'
+import { NgClass } from '@angular/common'
 
 @Component({
   selector: 'todo-list',
   standalone: true,
-  imports: [DragDropModule, TodoComponent, TodoListFooterComponent],
+  imports: [DragDropModule, TodoComponent, TodoListFooterComponent, NgClass],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -43,7 +43,7 @@ describe('TodoListComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should call reorder method with the correct todo id and new index on drop event', async () => {
+  it('should call the reorder method with the correct todo id and new index when a drag-and-drop event occurs', async () => {
     const previousIndex = 0
     const currentIndex = 2
     const todo = store.filteredTodos()[previousIndex]
@@ -60,7 +60,7 @@ describe('TodoListComponent', () => {
     expect(store.reorder).toHaveBeenCalledWith(todo.id, currentIndex)
   })
 
-  it('should render the list of todos when they are available', () => {
+  it('should render all todos from the filtered list when todos are available', () => {
     fixture.detectChanges()
 
     const todoElements = compiled.querySelectorAll('todo')
@@ -74,9 +74,8 @@ describe('TodoListComponent', () => {
     })
   })
 
-  it('should display an empty message when there are no todos and loading is false', () => {
+  it('should display an empty message when no todos are available in the filtered list', () => {
     store.filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue([])
-    store.loading = jasmine.createSpy('loading').and.returnValue(false)
 
     fixture.detectChanges()
 
@@ -87,20 +86,29 @@ describe('TodoListComponent', () => {
     expect(articleElement).not.toBeNull()
   })
 
-  it('should not display an empty message when there are no todos and loading is true', () => {
-    store.filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue([])
-    store.loading = jasmine.createSpy('loading').and.returnValue(true)
+  it('should hide the empty message when there are todos in the filtered list', () => {
+    store.filteredTodos = jasmine.createSpy('filteredTodos').and.returnValue(TODOS_MOCK)
 
     fixture.detectChanges()
 
     const todoElements = compiled.querySelectorAll('todo')
     const articleElement = compiled.querySelector('#empty_message')
 
-    expect(todoElements.length).toBe(0)
+    expect(todoElements.length).toBe(TODOS_MOCK.length)
     expect(articleElement).toBeNull()
   })
 
-  it('should render the TodoListFooter component', () => {
+  it('should apply loading classes to the section element when the store is in a loading state', () => {
+    store.loading = jasmine.createSpy('loading').and.returnValue(true)
+
+    fixture.detectChanges()
+
+    const sectionElement = compiled.querySelector('section')
+    expect(sectionElement?.classList.contains('animate-pulse')).toBe(true)
+    expect(sectionElement?.classList.contains('pointer-events-none')).toBe(true)
+  })
+
+  it('should render the TodoListFooter component at the bottom of the list', () => {
     const footerElement = compiled.querySelector('todo-list-footer')
     expect(footerElement).not.toBeNull()
   })
